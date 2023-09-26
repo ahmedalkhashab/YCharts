@@ -220,6 +220,7 @@ fun DonutPieChart(
                                 shouldShowUnit = shouldShowUnit,
                                 fontSize = fontSize,
                                 textToDraw = textToDraw,
+                                labelToDraw = selectedSlice.label,
                                 sideSize = sideSize
                             )
                         }
@@ -275,6 +276,7 @@ private fun drawLabel(
     shouldShowUnit: Boolean,
     fontSize: Float,
     textToDraw: String,
+    labelToDraw: String? = null,
     sideSize: Int
 ) {
     val paint = Paint().apply {
@@ -288,16 +290,32 @@ private fun drawLabel(
     var y: Float = (sideSize / 2).toFloat() + fontSize / 3
     if (shouldShowUnit)
         y -= (paint.fontSpacing / 4)
+    if (labelToDraw.isNullOrBlank().not())
+        y -= (paint.fontSpacing / 4)
     canvas.drawText(
         textToDraw,
         x, y,
         paint
     )
     y += paint.fontSpacing
-    canvas.drawText(
-        pieChartConfig.sumUnit,
-        x,
-        y,
-        paint
-    )
+    if (shouldShowUnit) {
+        if (labelToDraw.isNullOrBlank().not())
+            y -= (paint.fontSpacing / 4)
+        canvas.drawText(
+            pieChartConfig.sumUnit,
+            x,
+            y,
+            paint
+        )
+        y += paint.fontSpacing
+    }
+    labelToDraw?.let {
+        if (shouldShowUnit) y -= (paint.fontSpacing / 4)
+        canvas.drawText(
+            labelToDraw,
+            x, y,
+            paint
+        )
+        y += paint.fontSpacing
+    }
 }
