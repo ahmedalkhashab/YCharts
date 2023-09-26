@@ -52,8 +52,8 @@ publishing {
     publications {
         register<MavenPublication>("release") {
             groupId = "co.yml"
-            artifactId = "ycharts"
-            version = "2.1.0"
+            artifactId = "ycharts-hub"
+            version = "2.1.001"
             afterEvaluate {
                 from(components["release"])
             }
