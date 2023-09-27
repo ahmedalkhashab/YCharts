@@ -57,7 +57,7 @@ afterEvaluate {
 
                 groupId = "com.github.ahmedalkhashab"
                 artifactId = "ycharts"
-                version = "2.1.005"
+                version = "2.1.006"
 
                 //artifact(javadocJar)
                 pom {
@@ -101,6 +101,7 @@ afterEvaluate {
 }
 
 
+/*
 signing {
     useInMemoryPgpKeys(
         project.findProperty("signing.keyId")?.toString() ?: System.getenv("SIGNINGKEY"),
@@ -108,4 +109,4 @@ signing {
         project.findProperty("signing.password")?.toString()?:System.getenv("SIGNINGPASSWORD")
     )
     sign(publishing.publications)
-}
+}*/
