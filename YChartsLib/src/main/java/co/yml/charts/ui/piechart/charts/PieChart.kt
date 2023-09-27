@@ -43,7 +43,6 @@ import co.yml.charts.common.components.accessibility.SliceInfo
 import co.yml.charts.common.extensions.collectIsTalkbackEnabledAsState
 import co.yml.charts.common.extensions.getTextHeight
 import co.yml.charts.common.model.PlotType
-import co.yml.charts.ui.piechart.PieChartConstants.FIRST_SELECTED_SLICE
 import co.yml.charts.ui.piechart.PieChartConstants.MINIMUM_PERCENTAGE_FOR_SLICE_LABELS
 import co.yml.charts.ui.piechart.PieChartConstants.NO_SELECTED_SLICE
 import co.yml.charts.ui.piechart.models.PieChartConfig
@@ -87,7 +86,9 @@ fun PieChart(
         progressSize.add(sweepAngles[x] + progressSize[x - 1])
     }
 
-    var activePie by rememberSaveable { mutableStateOf(FIRST_SELECTED_SLICE) }
+    var activePie by rememberSaveable {
+        mutableStateOf(proportions.indexOfFirst { it.roundToInt() > 0 })
+    }
     val accessibilitySheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
