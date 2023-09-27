@@ -60,10 +60,10 @@ afterEvaluate {
                 version = "2.1.004"
 
                 //artifact(javadocJar)
-                /*pom {
+                pom {
                     name.set("YCharts")
                     description.set("YCharts is a light and extensible chart library for Jetpack Compose system.")
-                    url.set("https://github.com/yml-org/YCharts")
+                    //url.set("https://github.com/yml-org/YCharts")
                     licenses {
                         license {
                             name.set("The Apache License, Version 2.0")
@@ -71,6 +71,7 @@ afterEvaluate {
                             distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
                         }
                     }
+                    /*
                     developers {
                         developer {
                             id.set("dkk009")
@@ -92,19 +93,19 @@ afterEvaluate {
                         url.set("https://github.com/yml-org/YCharts")
                         connection.set("scm:git:git://github.com/yml-org/YCharts.git")
                         developerConnection.set("scm:git:ssh://git@github.com:yml-org/YCharts.git")
-                    }
-                }*/
+                    }*/
+                }
             }
         }
     }
 }
 
 
-/*signing {
+signing {
     useInMemoryPgpKeys(
         project.findProperty("signing.keyId")?.toString() ?: System.getenv("SIGNINGKEY"),
         project.findProperty("signing.InMemoryKey")?.toString() ?: System.getenv("MEMORY_KEY"),
         project.findProperty("signing.password")?.toString()?:System.getenv("SIGNINGPASSWORD")
     )
     sign(publishing.publications)
-}*/
+}
