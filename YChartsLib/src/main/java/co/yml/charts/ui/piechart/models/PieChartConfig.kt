@@ -73,7 +73,8 @@ data class PieChartConfig(
 ){
     enum class LabelType {
         PERCENTAGE,
-        VALUE
+        VALUE,
+        VALUE_INTEGER
     }
 
     enum class LabelColorType {

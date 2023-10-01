@@ -43,6 +43,7 @@ import co.yml.charts.common.components.accessibility.SliceInfo
 import co.yml.charts.common.extensions.collectIsTalkbackEnabledAsState
 import co.yml.charts.common.extensions.getTextHeight
 import co.yml.charts.common.model.PlotType
+import co.yml.charts.ui.piechart.PieChartConstants.FIRST_SELECTED_SLICE
 import co.yml.charts.ui.piechart.PieChartConstants.MINIMUM_PERCENTAGE_FOR_SLICE_LABELS
 import co.yml.charts.ui.piechart.PieChartConstants.NO_SELECTED_SLICE
 import co.yml.charts.ui.piechart.models.PieChartConfig
@@ -87,7 +88,10 @@ fun PieChart(
     }
 
     var activePie by rememberSaveable {
-        mutableStateOf(proportions.indexOfFirst { it.roundToInt() > 0 })
+        mutableStateOf(
+            if (pieChartData.slices.isEmpty()) NO_SELECTED_SLICE
+            else FIRST_SELECTED_SLICE
+        )
     }
     val accessibilitySheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
