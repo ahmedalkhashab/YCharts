@@ -234,8 +234,8 @@ fun PieChart(
                                 if (pieChartConfig.labelVisible) {
                                     val value = when (pieChartConfig.labelType) {
                                         PieChartConfig.LabelType.PERCENTAGE -> "${proportions[index].roundToInt()}%"
-                                        PieChartConfig.LabelType.VALUE -> proportions[index].toString()
-                                        PieChartConfig.LabelType.VALUE_INTEGER -> proportions[index].toInt().toString()
+                                        PieChartConfig.LabelType.VALUE -> pieChartData.slices[index].value.toString()
+                                        PieChartConfig.LabelType.VALUE_INTEGER -> pieChartData.slices[index].value.toInt().toString()
                                     }
                                     label = when (pieChartConfig.labelContentType) {
                                         PieChartConfig.LabelContentType.FULL_LABEL -> "$label $value"
