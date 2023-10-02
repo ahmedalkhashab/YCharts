@@ -55,6 +55,7 @@ data class PieChartConfig(
     val labelTypeface: Typeface = Typeface.DEFAULT,
     val labelVisible: Boolean = false,
     val labelType: LabelType = LabelType.PERCENTAGE,
+    val labelContentType: LabelContentType = LabelContentType.FULL_LABEL,
     val labelColor: Color = Color.White,
     val labelColorType: LabelColorType = LabelColorType.SPECIFIED_COLOR,
     val backgroundColor: Color = Color.White,
@@ -80,5 +81,10 @@ data class PieChartConfig(
     enum class LabelColorType {
         SPECIFIED_COLOR,
         SLICE_COLOR
+    }
+
+    enum class LabelContentType {
+        FULL_LABEL,
+        ONLY_VALUE
     }
 }

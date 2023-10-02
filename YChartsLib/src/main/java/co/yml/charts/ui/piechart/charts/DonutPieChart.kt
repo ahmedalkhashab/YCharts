@@ -41,7 +41,6 @@ import co.yml.charts.common.components.accessibility.AccessibilityBottomSheetDia
 import co.yml.charts.common.components.accessibility.SliceInfo
 import co.yml.charts.common.extensions.collectIsTalkbackEnabledAsState
 import co.yml.charts.common.model.PlotType
-import co.yml.charts.ui.piechart.PieChartConstants.FIRST_SELECTED_SLICE
 import co.yml.charts.ui.piechart.PieChartConstants.NO_SELECTED_SLICE
 import co.yml.charts.ui.piechart.models.PieChartConfig
 import co.yml.charts.ui.piechart.models.PieChartData
@@ -84,8 +83,8 @@ fun DonutPieChart(
 
     var activePie by rememberSaveable {
         mutableStateOf(
-            if (pieChartData.slices.isEmpty()) NO_SELECTED_SLICE
-            else FIRST_SELECTED_SLICE
+            if (pieChartData.slices.isEmpty() || sumOfValues == 0.0f) NO_SELECTED_SLICE
+            else pieChartData.slices.indexOfFirst { it.value > 0 }
         )
     }
     val accessibilitySheetState =

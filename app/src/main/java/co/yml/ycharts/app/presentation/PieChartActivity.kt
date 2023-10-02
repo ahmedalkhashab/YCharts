@@ -139,7 +139,9 @@ private fun PiechartWithSliceLables(context: Context) {
             isAnimationEnable = true,
             chartPadding = 20,
             showSliceLabels = true,
-            labelVisible = true
+            labelVisible = true,
+            labelType = PieChartConfig.LabelType.VALUE_INTEGER,
+            labelContentType = PieChartConfig.LabelContentType.ONLY_VALUE
         )
     Column(modifier = Modifier.height(500.dp)) {
         Legends(legendsConfig = DataUtils.getLegendsConfigFromPieChartData(pieChartData, 3))

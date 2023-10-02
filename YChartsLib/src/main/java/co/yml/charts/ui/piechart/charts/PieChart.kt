@@ -43,7 +43,6 @@ import co.yml.charts.common.components.accessibility.SliceInfo
 import co.yml.charts.common.extensions.collectIsTalkbackEnabledAsState
 import co.yml.charts.common.extensions.getTextHeight
 import co.yml.charts.common.model.PlotType
-import co.yml.charts.ui.piechart.PieChartConstants.FIRST_SELECTED_SLICE
 import co.yml.charts.ui.piechart.PieChartConstants.MINIMUM_PERCENTAGE_FOR_SLICE_LABELS
 import co.yml.charts.ui.piechart.PieChartConstants.NO_SELECTED_SLICE
 import co.yml.charts.ui.piechart.models.PieChartConfig
@@ -89,8 +88,8 @@ fun PieChart(
 
     var activePie by rememberSaveable {
         mutableStateOf(
-            if (pieChartData.slices.isEmpty()) NO_SELECTED_SLICE
-            else FIRST_SELECTED_SLICE
+            if (pieChartData.slices.isEmpty() || sumOfValues == 0.0f) NO_SELECTED_SLICE
+            else pieChartData.slices.indexOfFirst { it.value > 0 }
         )
     }
     val accessibilitySheetState =
@@ -225,10 +224,23 @@ fun PieChart(
 
                         drawIntoCanvas {
                             it.nativeCanvas.withRotation(
-                                arcCenter, x, y
+                                degrees = when (pieChartConfig.labelContentType) {
+                                    PieChartConfig.LabelContentType.FULL_LABEL -> arcCenter
+                                    PieChartConfig.LabelContentType.ONLY_VALUE -> 0.0f
+                                },
+                                x,
+                                y
                             ) {
                                 if (pieChartConfig.labelVisible) {
-                                    label = "$label ${proportions[index].roundToInt()}%"
+                                    val value = when (pieChartConfig.labelType) {
+                                        PieChartConfig.LabelType.PERCENTAGE -> "${proportions[index].roundToInt()}%"
+                                        PieChartConfig.LabelType.VALUE -> proportions[index].toString()
+                                        PieChartConfig.LabelType.VALUE_INTEGER -> proportions[index].toInt().toString()
+                                    }
+                                    label = when (pieChartConfig.labelContentType) {
+                                        PieChartConfig.LabelContentType.FULL_LABEL -> "$label $value"
+                                        PieChartConfig.LabelContentType.ONLY_VALUE -> value
+                                    }
                                 }
                                 it.nativeCanvas.drawText(
                                     if (pieChartConfig.isEllipsizeEnabled) ellipsizedText
