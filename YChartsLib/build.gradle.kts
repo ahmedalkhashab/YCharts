@@ -57,7 +57,7 @@ afterEvaluate {
 
                 groupId = "com.github.ahmedalkhashab"
                 artifactId = "ycharts"
-                version = "2.1.021"
+                version = "2.1.022"
 
                 //artifact(javadocJar)
                 pom {
