@@ -156,7 +156,7 @@ data class SelectionHighlightData(
                 color = highlightTextBackgroundColor,
                 topLeft = Offset(
                     background.left.toFloat(),
-                    background.top.toFloat() - highlightTextOffset.toPx()
+                    background.top.toFloat() + highlightTextOffset.toPx()
                 ),
                 size = Size(background.width().toFloat(), background.height().toFloat()),
                 alpha = highlightTextBackgroundAlpha,
@@ -168,7 +168,7 @@ data class SelectionHighlightData(
             drawText(
                 label,
                 centerPointOfBar,
-                selectedOffset.y - highlightTextOffset.toPx(),
+                selectedOffset.y + highlightTextOffset.toPx(),
                 highlightTextPaint
             )
         }
