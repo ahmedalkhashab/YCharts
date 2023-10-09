@@ -22,7 +22,7 @@ import co.yml.charts.common.model.LegendsConfig
 @Composable
 fun Legends(modifier: Modifier = Modifier, legendsConfig: LegendsConfig) {
     with(legendsConfig) {
-        if (legendLabelList.size > 1) {
+        if (legendLabelList.isNotEmpty()) {
             LazyVerticalGrid(
                 modifier = modifier
                     .fillMaxWidth()
