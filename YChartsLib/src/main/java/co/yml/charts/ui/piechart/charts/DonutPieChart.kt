@@ -81,7 +81,7 @@ fun DonutPieChart(
         progressSize.add(sweepAngles[x] + progressSize[x - 1])
     }
 
-    var activePie by rememberSaveable {
+    var activePie by rememberSaveable(pieChartData.slices.size) {
         mutableStateOf(
             if (pieChartData.slices.isEmpty() || sumOfValues == 0.0f) NO_SELECTED_SLICE
             else pieChartData.slices.indexOfFirst { it.value > 0 }
